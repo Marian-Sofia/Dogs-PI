@@ -12,7 +12,7 @@ getDogsRouter
 
     return res.status(200).json(data)
 
-  } catch ({message}) {
+  } catch ({ message }) {
     return res.status(404).send(message)
   }
 
