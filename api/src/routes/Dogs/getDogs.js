@@ -1,23 +1,30 @@
 const getDogsRouter = require('express').Router();
-// const { Dogs } = require('../../db')
-const { getDogs } = require('../Controllers/controllers')
+const { getDogs, getDogsByBreed } = require('../Controllers/controllers')
 
 getDogsRouter
-// ruta por raza y name
+// Ruta por todas las razas y por el nombre de una raza en especifico
 .get('/', async (req, res) => {
 
   try {
+    // Se hace una request de el nombre por query
+    const { name } = req.query
 
-    const data = await getDogs()
+    // Se evalua si name existe, si esta, se ejecuta la funcion que busca por el nombre de la raza de el perro
+    if(name){
+      const dataName = await getDogsByBreed(name)
+      return res.status(200).json(dataName)
+    } 
 
-    return res.status(200).json(data)
+    // Se trae la funcion que hace un get general de todas las razas y se ejecuta
+    const dataApi = await getDogs()
+    return res.status(200).json(dataApi)
 
   } catch ({ message }) {
-    return res.status(404).send(message)
+    return res.status(404).send({ error: message})
   }
 
 })
-// ruta por id
+// Ruta para traer por ID
 .get('/:id', (req, res) => {
 
 })
