@@ -1,5 +1,5 @@
 const getDogsRouter = require('express').Router();
-const { getDogs, getDogsByBreed } = require('../Controllers/controllers')
+const { getDogs, getDogsByBreed, getDogsById } = require('../Controllers/controllers')
 
 getDogsRouter
 // Ruta por todas las razas y por el nombre de una raza en especifico
@@ -25,7 +25,21 @@ getDogsRouter
 
 })
 // Ruta para traer por ID
-.get('/:id', (req, res) => {
+.get('/:id', async (req, res) => {
+
+  try {
+
+    const { id } = req.params
+
+    const source = isNaN(id) ? 'DB' : 'API'
+
+    const data = await getDogsById(id, source)
+
+    return res.status(200).json(data)
+    
+  } catch ({ message }) {
+    return res.status(404).send({ error : message })
+  }
 
 })
 module.exports = getDogsRouter

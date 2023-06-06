@@ -1,6 +1,5 @@
 const postDogsRouter = require('express').Router();
-const { postDogs } = require('../Controllers/controllers')
-// const { Dogs } = require('../../db')
+const { postDogs } = require('../Controllers/controllers');
 
 postDogsRouter
 // post dogs 
@@ -11,7 +10,7 @@ postDogsRouter
         const { name, height, weight, life_span, image, temperament } = req.body
         const data = await postDogs(name, height, weight, life_span, image, temperament)
 
-        return res.status(200).json({ message: data })
+        return res.status(201).json({ message: data })
         
     } catch ({ message }) {
         return res.status(404).send(message)

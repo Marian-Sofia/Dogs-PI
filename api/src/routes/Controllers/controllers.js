@@ -2,7 +2,7 @@ const { Dog, Temperaments } = require('../../db')
 const { URL_API, API_KEY } = require('dotenv').config().parsed;
 const { Op } = require('sequelize')
 
-const { cleanArrayDogs } = require("../../Auxiliar/auxiliar");
+const { cleanArrayDogs, cleanDogs } = require("../../Auxiliar/auxiliar");
 
 
 
@@ -19,7 +19,15 @@ const getDogs = async () => {
     const dataAPI = cleanArrayDogs(data) 
 
     // Se extraen los datos de la DB
-    const dataDB = await Dog.findAll()
+    const dataDB = await Dog.findAll({
+        include: {
+            model: Temperaments,
+            attributes: ['name'],
+            through: {
+                attributes: []
+            }
+        }
+    })
 
     // Se unen los datos de la API y la DB usando el Spreed Operator
     const results = [...dataDB,...dataAPI]
@@ -33,6 +41,7 @@ const getDogs = async () => {
 }
 // GETDOGS -- funcion que busca por el nombre de la raza
 const getDogsByBreed = async (name) => {
+
 
     const dataDB = await Dog.findAll({
         where: {
@@ -59,8 +68,33 @@ const getDogsByBreed = async (name) => {
 
 }
 // GETDOGS -- funcion que busca por id
-const getDogsById = () => {
+const getDogsById = async (id, source) => {
 
+    if(source === 'API'){
+        const res = await fetch(`${URL_API}${id}`)
+        const data = await res.json()
+
+        if(!data || !data.length) throw Error('The ID does not exist')
+
+
+        return cleanDogs(data)
+
+    } else {
+        
+        const data = await Dog.findOne({
+            where: { id },
+            include: {
+                model: Temperaments,
+                attributes: ['name'],
+                through: {
+                    attributes: []
+                }
+            }
+        })
+
+        return data
+
+    }
 }
 
 
@@ -86,14 +120,34 @@ const postDogs = async ( name, height, weight, life_span, image, temperament ) =
 
 
 // PUTDOGS -- funcion que sirve para editar los perros creados en la DB
-const putDogs = () => {
+const putDogs = async ( id, name, height, weight, life_span, image, temperament ) => {
+
+    await Dog.update({
+        name,
+        height,
+        weight,
+        life_span,
+        image,
+        temperament
+    }, {
+        where: { id }
+    })
+
+    
+
+    return 'The dog was edited successfully'
 
 }
 
 
 // DELETEDOGS -- funcion para eliminar a los perros creados por la DB
-const deleteDogs = () => {
+const deleteDogs = async (id) => {
+ 
+    await Dog.destroy({
+        where: { id }
+    })
 
+    return 'The dog was deleted successfully'
 }
 
 
@@ -101,7 +155,15 @@ const deleteDogs = () => {
 //      TEMPERAMENTS
 
 // GETTEMPERAMENTS -- funcion que busca el temperamento de los perros
-const getTemperaments = () => {
+const getTemperament = async () => {
+
+    const set = new Set();
+
+   const res = await fetch(`${URL_API}`)
+   const data = await res.json()
+
+   const dataMap = data.map( value => set.add(value.temperament))
+   console.log(set)
 
 }
 
@@ -115,5 +177,5 @@ module.exports ={
     postDogs,
     putDogs,
     deleteDogs,
-    getTemperaments
+    getTemperament
 }

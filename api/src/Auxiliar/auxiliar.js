@@ -5,14 +5,14 @@ const cleanDogs = (dog) => {
         height: dog.height.metric,
         weight: dog.weight.metric,
         life_span: dog.life_span,
-        image: dog.image.url,
+        image: dog.image ? dog.image.url : dog.reference_image_id,
         temperaments: dog.temperament,
     }
 
     return obj
 }
 
-const cleanArrayDogs = (array) => array ? array.map( dog => cleanDogs(dog)) : [];
+const  cleanArrayDogs = (array) => array ? array.map( dog => cleanDogs(dog)) : [];
 
 module.exports = {
     cleanDogs,
