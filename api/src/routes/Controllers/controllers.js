@@ -114,6 +114,14 @@ const postDogs = async ( name, height, weight, life_span, image, temperament ) =
         temperament,
     })
 
+    const find = await Temperaments.findAll({
+        where: {
+            name: temperament
+        }
+    })
+
+    await newDog.addTemperaments(find)
+
     // Mensaje de que el objeto se ha creado correctamente en la DB
     return 'The Dog was created successfully'
 }
@@ -157,14 +165,23 @@ const deleteDogs = async (id) => {
 // GETTEMPERAMENTS -- funcion que busca el temperamento de los perros
 const getTemperament = async () => {
 
-    const set = new Set();
+    const res = await fetch(`${URL_API}`)
+    const data = await res.json()
 
-   const res = await fetch(`${URL_API}`)
-   const data = await res.json()
+    for(const element of data ){
+        if(element.temperament){
+            const clean = element.temperament.split(',')
+            for(const item of clean){
+                await Temperaments.findOrCreate({
+                    where:{
+                        name: item.trim(),
+                    },
+                })
+            }
+        }
+    }
 
-   const dataMap = data.map( value => set.add(value.temperament))
-   console.log(set)
-
+    return 
 }
 
 
