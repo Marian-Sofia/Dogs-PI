@@ -29,10 +29,13 @@ getDogsRouter
 
   try {
 
+    // se trae el ID por params
     const { id } = req.params
 
+    // Se hace un ternario que servira para saber en que lugar se debe buscar el perro, si es en la DB el ID sera un UUID, si es API el ID sera un INTEGER
     const source = isNaN(id) ? 'DB' : 'API'
 
+    // Se le pasan por parametros el ID que se busca y el Source para decirle a la funcion donde tiene que buscar 
     const data = await getDogsById(id, source)
 
     return res.status(200).json(data)
@@ -42,4 +45,5 @@ getDogsRouter
   }
 
 })
+
 module.exports = getDogsRouter

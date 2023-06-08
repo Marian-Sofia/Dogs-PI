@@ -7,7 +7,10 @@ deleteDogsRouter
     
     try {
         
+        // Se busca el ID por params para saber que perro eliminar
         const { id } = req.params
+
+        // se ejecuta la funcion que elimina y se le pasa el ID
         const data = await deleteDogs(id)
 
         return res.status(200).json({ message: data })
