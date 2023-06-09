@@ -83,9 +83,9 @@ const getDogsById = async (id, source) => {
         // Si es igual a API este hace la peticion a la API y busca por ID
         const res = await fetch(`${URL_API}${id}`)
         const data = await res.json()
-
+        
         // Se maneja el error y se lanza un mensaje 
-        if(!data || !data.length) throw Error('The ID does not exist')
+        if(!data) throw Error('The ID does not exist')
 
         // se retorna el objeto que recoge solo los datos de importancia 
         return cleanDogs(data)
