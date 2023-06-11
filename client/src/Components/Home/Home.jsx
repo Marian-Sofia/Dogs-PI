@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { getDogs } from '../../Redux/actions'
+import { 
+    getDogs, 
+    getTemperaments } 
+from '../../Redux/actions'
 import { CardContainer } from '../index'
 
 
@@ -10,6 +13,7 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(getDogs())
+        dispatch(getTemperaments())
     }, [])
 
     return (

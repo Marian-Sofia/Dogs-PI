@@ -6,7 +6,7 @@ const cleanDogs = (dog) => {
         weight: dog.weight.metric,
         life_span: dog.life_span,
         image: dog.image ? dog.image.url : dog.reference_image_id,
-        temperaments: dog.temperament,
+        temperaments: typeof(dog.temperament) === 'string' ? dog.temperament.split(', ').map( value => { return { name: value }}) : [{ name: 'undefined' }]
     }
 
     return obj

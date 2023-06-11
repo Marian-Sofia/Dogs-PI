@@ -4,7 +4,7 @@ import { DETAIL_DOGS, GET_DOGS, GET_TEMPERAMENTS } from "./action-types";
 // Se crea el estado inicial con las propiedades a las que se les va a añadir la data que se obtiene del Back-End
 const initialState = {
     dogs: [],
-    detailDogs: [],
+    detailDogs: {},
     temperaments: [],
 }
 

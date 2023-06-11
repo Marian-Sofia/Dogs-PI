@@ -7,9 +7,9 @@ function App() {
     <div>
       <Routes>
         <Route path='/' element={<LandingPage/>}/>
-        <Route path='/Home' element={<Home/>}/>
-        <Route path='/Create' element={<Form/>}/>
-        <Route path='/Detail' element={<Detail/>}/>
+        <Route path='/home' element={<Home/>}/>
+        <Route path='/create' element={<Form/>}/>
+        <Route path='/detail/:id' element={<Detail/>}/>
       </Routes>
     </div>
   )
