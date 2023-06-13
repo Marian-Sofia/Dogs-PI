@@ -1,24 +1,16 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux'
-import { 
-    getDogs, 
-    getTemperaments } 
-from '../../Redux/actions'
 import { CardContainer } from '../index'
+import { useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 
 const Home = () => {
-    const dispatch = useDispatch()
     const dogs = useSelector(state => state.dogs)
-
-    useEffect(() => {
-        dispatch(getDogs())
-        dispatch(getTemperaments())
-    }, [])
+    const navigate = useNavigate()
 
     return (
         <div>
             <h1>Home</h1>
+            <button onClick={() => navigate('/create')}>Creation Form</button>
             { dogs.length ? <CardContainer state={dogs}/> : <h1>Loading...</h1>}
         </div>
     )

@@ -1,7 +1,7 @@
 const { Dog, Temperaments } = require('../../db')
 const { URL_API, API_KEY } = require('dotenv').config().parsed;
 const { Op } = require('sequelize')
-const { cleanArrayDogs, cleanDogs } = require("../../Auxiliar/auxiliar");
+const { cleanArrayDogs, cleanDogs, fetchImage } = require("../../Auxiliar/auxiliar");
 
 
 
@@ -13,6 +13,7 @@ const getDogs = async () => {
     // Se extraen los datos de la api mediante un fetch
     const res = await fetch(`${URL_API}`)
     const data = await res.json()
+    console.log(data);
 
     // Se limpia el array de datos para traer solo los datos de interes
     const dataAPI = cleanArrayDogs(data) 
@@ -83,12 +84,15 @@ const getDogsById = async (id, source) => {
         // Si es igual a API este hace la peticion a la API y busca por ID
         const res = await fetch(`${URL_API}${id}`)
         const data = await res.json()
+
+
+        const image = await fetchImage(data.reference_image_id)
         
         // Se maneja el error y se lanza un mensaje 
         if(!data) throw Error('The ID does not exist')
 
         // se retorna el objeto que recoge solo los datos de importancia 
-        return cleanDogs(data)
+        return cleanDogs(data, image)
 
     } else {
         

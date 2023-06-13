@@ -1,7 +1,20 @@
 import { Routes, Route } from 'react-router-dom'
 import { LandingPage, Home, Form, Detail } from './Components'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { 
+    getDogs, 
+    getTemperaments } 
+from './Redux/actions'
 
 function App() {
+  const dispatch = useDispatch()
+
+  
+  useEffect(() => {
+    dispatch(getDogs())
+    dispatch(getTemperaments())
+}, [])
 
   return (
     <div>
