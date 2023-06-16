@@ -13,11 +13,6 @@ const cleanDogs = (dog, image) => {
         temperaments: typeof(dog.temperament) === 'string' ? dog.temperament.split(', ').map( value => { return { name: value } }) : [{ name: 'undefined' }]
     }
     
-    // if(obj.image === 'url'){
-    //     fetchImage(dog.reference_image_id).then((res) => obj.image = res )
-    //     console.log(obj.image);
-    // }
-
     return obj
 }
 

@@ -13,7 +13,6 @@ const getDogs = async () => {
     // Se extraen los datos de la api mediante un fetch
     const res = await fetch(`${URL_API}`)
     const data = await res.json()
-    console.log(data);
 
     // Se limpia el array de datos para traer solo los datos de interes
     const dataAPI = cleanArrayDogs(data) 
@@ -60,11 +59,17 @@ const getDogsByBreed = async (name) => {
     })
 
     // Se hace el fetch a la API con la query y le pasamos el name 
-    const res = await fetch(`${URL_API}search?name=${name}&key=${API_KEY}`)
+    const res = await fetch(`${URL_API}search?name=${name}`)
     const data = await res.json()
+     if(data.length < 1) {
+         console.log(data);
+        console.log(dataDB);
+        return dataDB
+     }
+    const image = await fetchImage(data[0].reference_image_id)
 
     // Se limpia la data para traer los datos necesarios
-    const dataAPI = cleanArrayDogs(data)
+    const dataAPI = [cleanDogs(data[0], image)]
 
     // Se unen los datos de la DB y los de la API
     const results = [...dataDB, ...dataAPI]
