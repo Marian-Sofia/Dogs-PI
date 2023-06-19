@@ -1,11 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import handleError from '../Validations';
-import { postDogs } from '../../Redux/actions';
+import { detailDogs, postDogs, putDogs } from '../../Redux/actions';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 const Form = () => {
-    const temperament = useSelector(state => state.temperaments)
     const dispatch = useDispatch()
+    const id = useParams().id
+    const location = useLocation().pathname
+    const navigate = useNavigate()
+    
+    if(location === `/edit/${id}`){
+        useEffect(() => {
+            dispatch(detailDogs(id))
+        }, [])
+    }
+    
+    const temperament = useSelector(state => state.temperaments)
+    const dogsDetail = useSelector( state => state.detailDogs)
+
+    const [dog, setDog] = useState({
+        name: location === `/edit/${id}` ? dogsDetail.name : '',
+        height: location === `/edit/${id}` ? dogsDetail.height : '',
+        weight: location === `/edit/${id}` ? dogsDetail.weight : '',
+        life_span: location === `/edit/${id}` ? dogsDetail.life_span : '',
+        image: location === `/edit/${id}` ? dogsDetail.image : '',
+        temperament: location === '/create' ? [] : dogsDetail.temperaments.map(temp => temp.name)
+    })
 
     const [error, setError] = useState({
         name: '',
@@ -15,14 +36,6 @@ const Form = () => {
         image: ''
     })
 
-    const [dog, setDog] = useState({
-        name: '',
-        height: 0,
-        weight: 0,
-        life_span: 0,
-        image: '',
-        temperament: []
-    })
     
     const handlerTemps = (event) => {
         event.preventDefault();
@@ -35,8 +48,33 @@ const Form = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(dog);
+
+        if(location === `/edit/${id}`){
+            dog.id = id
+            dispatch(putDogs(dog))
+            setDog({
+                id: '',
+                name: '',
+                height: '',
+                weight: '',
+                life_span: '',
+                image: '',
+                temperaments: [],
+            })
+            navigate(`/detail/${id}`)
+            return
+        }
+        
         dispatch(postDogs(dog))
+        setDog({
+            name: '',
+            height: '',
+            weight: '',
+            life_span: '',
+            image: '',
+            temperaments: [],
+        })
+        navigate('/home')
     }
 
     const deleteTemp = (event) => {
@@ -59,13 +97,15 @@ const Form = () => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-            <h1>Creation Form</h1>
+            <h1>Form</h1>
 
                 <label>Name: 
                     <input 
                     placeholder='Name' 
                     onChange={handleChange} 
-                    name="name"/>
+                    name="name"
+                    autoComplete='off'
+                    value={dog.name}/>
                 </label>
                 {error.name && <span>{error.name}</span>}
 
@@ -73,7 +113,9 @@ const Form = () => {
                     <input  
                     placeholder='Height (min - max)' 
                     onChange={handleChange} 
-                    name="height"/>
+                    name="height"
+                    autoComplete='off'
+                    value={dog.height}/>
                 </label>
                 {error.height && <span>{error.height}</span>}
 
@@ -81,7 +123,9 @@ const Form = () => {
                     <input 
                     placeholder='Weight (min - max)' 
                     onChange={handleChange} 
-                    name="weight"/>
+                    name="weight"
+                    autoComplete='off'
+                    value={dog.weight}/>
                 </label>
                 {error.weight && <span>{error.weight}</span>}
 
@@ -89,7 +133,9 @@ const Form = () => {
                     <input
                     placeholder='Life span (min - max)' 
                     onChange={handleChange} 
-                    name="life_span"/>
+                    name="life_span"
+                    autoComplete='off'
+                    value={dog.life_span}/>
                 </label>
                 {error.life_span && <span>{error.life_span}</span>}
 
@@ -97,7 +143,9 @@ const Form = () => {
                     <input 
                     placeholder='Url' 
                     onChange={handleChange} 
-                    name="image"/>
+                    name="image"
+                    autoComplete='off'
+                    value={dog.image}/>
                 </label>
                 {error.image && <span>{error.image}</span>}
 
@@ -114,7 +162,7 @@ const Form = () => {
 
                 <div>
                     <h1>Selected Temperaments</h1>
-                    {dog.temperament.length < 1 ? 
+                    {dog.temperament?.length < 1 ? 
                     <span>You should choose at least one temperament</span> : 
                     dog.temperament?.map((temp, i) => 
                     <div 
@@ -127,7 +175,9 @@ const Form = () => {
                 <hr/>
                 <br/>
 
-                <button>Create</button>
+                { location === `/edit/${id}` ? 
+                <button>Edit</button> : 
+                <button>Create</button>}
 
             </form>
 

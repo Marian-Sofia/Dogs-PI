@@ -1,10 +1,12 @@
 // Se importan las action_types para hacer un manejo de ellas 
 import { 
+    DELETE_DOGS,
     DETAIL_DOGS, 
     GET_DOGS, 
     GET_DOGS_NAME, 
     GET_TEMPERAMENTS, 
-    POST_DOGS} from "./action-types";
+    POST_DOGS,
+    PUT_DOGS} from "./action-types";
 
 // Se crea el estado inicial con las propiedades a las que se les va a añadir la data que se obtiene del Back-End
 const initialState = {
@@ -30,16 +32,28 @@ const reducer = (state = initialState, { type, payload }) => {
                 dogsName: payload
             }
 
-        case POST_DOGS:
-            return {
-                ...state,
-                mesage: payload
-            }
-    
         case DETAIL_DOGS:
             return {
                 ...state,
                 detailDogs: payload
+            }
+
+        case POST_DOGS:
+            return {
+                ...state,
+                message: payload
+            }
+    
+        case PUT_DOGS:
+            return {
+                ...state,
+                message: payload
+            }
+
+        case DELETE_DOGS:
+            return {
+                ...state,
+                message: payload
             }
         
         case GET_TEMPERAMENTS:

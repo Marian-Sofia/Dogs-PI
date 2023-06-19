@@ -10,8 +10,6 @@ import {
 } from './action-types'
 
 // Se crean las funciones que hacen un fetch al Back-End
-
-// Se crea la funcion get por nombre y busqueda general manejandolo con un condicional
 export const getDogs = () => {
     return async function (dispatch) {
             const res = await fetch('http://localhost:3001/dogs')
@@ -30,6 +28,7 @@ export const dogsName = (name) => {
 
 export const postDogs = (dog) => {
     return async function (dispatch) {
+        console.log(dog);
         const res = await fetch('http://localhost:3001/dogs', {
             method: 'POST',
             headers:{
@@ -37,14 +36,40 @@ export const postDogs = (dog) => {
             },
             body: JSON.stringify(dog)
         })
-        console.log(res);
         const data = await res.json()
         console.log(data);
         dispatch({ type: POST_DOGS, payload: data })
     }
 }
 
-// Se crea la funcion que busca por ID para el Detail
+export const putDogs = (dog) => {
+    return async function (dispatch) {
+        console.log(dog);
+        const res = await fetch('http://localhost:3001/dogs', {
+            method: 'PUT',
+            headers: {
+                "Content-type":"application/json; charset=UTF-8"
+            },
+            body: JSON.stringify(dog)
+        })
+        const data = await res.json()
+        console.log(data);
+        dispatch({ type: PUT_DOGS, payload: data })
+    }
+}
+
+export const deleteDogs = (id) => {
+    return async function (dispatch) {
+        const res = await fetch(`http://localhost:3001/dogs/${id}`, {
+            method: 'DELETE'
+        }) 
+        const data = await res.json()
+        console.log(data);
+        dispatch({ type: DELETE_DOGS, payload: data })
+    }
+}
+
+
 export const detailDogs = (id) => {
     return async function (dispatch) {
         const res = await fetch(`http://localhost:3001/dogs/${id}`)

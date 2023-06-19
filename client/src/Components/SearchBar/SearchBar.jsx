@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { dogsName, getDogs } from "../../Redux/actions";
+import { dogsName } from "../../Redux/actions";
 import { useNavigate } from "react-router-dom";
-import { BsSearchHeart } from 'react-icons/bs'
+import { BsSearchHeart } from 'react-icons/bs';
+import style from './SearchBar.module.css'
 
 const SearchBar = () => {
     const [name, setName] = useState('')
@@ -22,8 +23,8 @@ const SearchBar = () => {
 
     return(
         <>
-            <input placeholder="Search" onChange={handleSearch} value={name}/>
-            <button onClick={() => onSearch(name)}> <BsSearchHeart/> </button>
+            <input className={style.input} placeholder="search your doggie" onChange={handleSearch} value={name}/>
+            <button className={style.btn} onClick={() => onSearch(name)}> <BsSearchHeart/> </button>
         </>
     )
 }

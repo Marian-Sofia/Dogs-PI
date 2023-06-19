@@ -1,13 +1,12 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { LandingPage, Home, Form, Detail } from './Components/index'
+import { LandingPage, Home, Form, Detail, Search, Nav } from './Components/index'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { 
     getDogs, 
     getTemperaments } 
 from './Redux/actions'
-import Nav from './Components/Nav/Nav'
-import Search from './Components/Search/Search'
+import './App.css'
 
 function App() {
   const location = useLocation().pathname
@@ -26,6 +25,7 @@ function App() {
         <Route path='/home' element={<Home/>}/>
         <Route path='/search' element={<Search/>}/>
         <Route path='/create' element={<Form/>}/>
+        <Route path='/edit/:id' element={<Form/>}/>
         <Route path='/detail/:id' element={<Detail/>}/>
       </Routes>
     </div>

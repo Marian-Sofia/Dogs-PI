@@ -1,0 +1,42 @@
+.contain{
+    background-color: #ffffff44;
+    backdrop-filter: blur(4px);
+    border-bottom: 2.5px dashed #000;
+    display: grid;
+    grid-template-columns: repeat(6, auto);
+    height: 5rem;
+    align-content: center;
+    justify-content: center;
+    gap: 5rem;
+    align-items: center;
+    position: sticky;
+    top: 0.01px;
+    box-shadow: 0 0 10px #000;
+}
+
+
+.title{
+    font-size: 3.5rem;
+    position: relative;
+    right: 6rem;
+    letter-spacing: .2rem;
+}
+
+.emoji{
+    font-size: 2.8rem;
+    position: relative;
+    padding-bottom: 0.3rem;
+    right: 2rem;
+    text-shadow: 0 0 5px #000;
+}
+
+.btn{
+    height: 3.5rem;
+    width: 5.5rem;
+    font-size: 2.2rem;
+    background-color: #DCD6E9;
+    position: relative;
+    right: 2rem;
+    border: 3px dashed #a090c7;
+    border-radius: 1rem;
+}

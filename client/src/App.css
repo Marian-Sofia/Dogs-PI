@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Amatic SC', cursive;
+}
+
+body{
+    background-image: url('./images/vecteezy_dog-and-cat-paw-pattern-background_.jpg');
+    background-size: contain;
+    background-repeat: repeat;
+    background-position: center;
+}
