@@ -22,7 +22,6 @@ const Home = () => {
 
     return (
         <div>
-            <h1>Home</h1>
             { dogs.length ? <CardContainer page={page} items={items} state={dogs}/> : <h1>Loading...</h1>}
             <Paged page={page} setPage={setPage} max={max}/>
         </div>

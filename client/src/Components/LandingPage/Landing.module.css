@@ -26,7 +26,7 @@
     box-shadow: 0 0 5px #000;
     border: 2px dashed #897c8a;
     border-radius: 1rem;
-    transition: 1.1s;
+    transition: .9s;
     cursor: pointer;
 }
 

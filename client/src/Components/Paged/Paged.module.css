@@ -29,4 +29,5 @@
 .icon:hover{
     background-color: #F1D295;
     box-shadow: 0 0 5px #000;
+    scale: 0.9;
 }

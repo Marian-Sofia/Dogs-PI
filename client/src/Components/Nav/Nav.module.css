@@ -4,7 +4,7 @@
     border-bottom: 2.5px dashed #000;
     display: grid;
     grid-template-columns: repeat(6, auto);
-    height: 5rem;
+    height: 4rem;
     align-content: center;
     justify-content: center;
     gap: 5rem;
@@ -12,18 +12,19 @@
     position: sticky;
     top: 0.01px;
     box-shadow: 0 0 10px #000;
+    z-index: 100;
 }
 
 
 .title{
-    font-size: 3.5rem;
+    font-size: 3rem;
     position: relative;
     right: 6rem;
     letter-spacing: .2rem;
 }
 
 .emoji{
-    font-size: 2.8rem;
+    font-size: 2.4rem;
     position: relative;
     padding-bottom: 0.3rem;
     right: 2rem;
@@ -31,12 +32,38 @@
 }
 
 .btn{
-    height: 3.5rem;
+    height: 2.8rem;
     width: 5.5rem;
-    font-size: 2.2rem;
+    text-align: center;
+    font-size: 2rem;
     background-color: #DCD6E9;
     position: relative;
     right: 2rem;
     border: 3px dashed #a090c7;
     border-radius: 1rem;
+    cursor: pointer;
+}
+
+.btn:hover{
+    animation: button infinite 1s linear;
+    border: 4px dashed #000;
+    scale: 0.9;
+}
+
+@keyframes button {
+    0% {
+        background-color: #c0a3ff;
+    }
+    25% {
+        background-color: #afbbff;
+    }
+    50% {
+        background-color: #b3ddff;
+    }
+    75% {
+        background-color: #f4a1ff;
+    }
+    100% {
+        background-color: #ffb7b7;
+    }
 }

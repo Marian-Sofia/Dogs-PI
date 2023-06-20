@@ -17,9 +17,9 @@ const Nav = () => {
         <div className={style.contain}>
             <h2 className={style.emoji}>🐕</h2>
             <h3 className={style.title}>GOOD DOGGIES </h3>
-            <button className={style.btn} onClick={() => navigate('/home')}>Home</button>
+            <div className={style.btn} onClick={() => navigate('/home')}>Home</div>
             {/* <button className={style.btn} onClick={() => refresh()}> <TiRefresh/> </button> */}
-            <button className={style.btn} onClick={() => navigate('/create')}>Create</button>
+            <div className={style.btn} onClick={() => navigate('/create')}>Create</div>
 
             <SearchBar/>
         </div>

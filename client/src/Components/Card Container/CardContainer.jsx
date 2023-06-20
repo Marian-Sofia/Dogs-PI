@@ -1,11 +1,12 @@
 import { useLocation } from "react-router-dom";
 import { Card } from "../index";
+import style from './CardContainer.module.css'
 
 const CardContainer = ({ state, page, items }) => {
     const location = useLocation().pathname
 
     return (
-        <div>
+        <div className={style.contain}>
             {location === '/search' ?  
             state.map(({ id, name, temperaments, image }) => {
                 return <Card

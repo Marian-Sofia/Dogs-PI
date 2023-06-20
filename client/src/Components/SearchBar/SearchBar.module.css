@@ -1,12 +1,21 @@
 .input{
     background: #FBEADA;
-    height: 2.8rem;
+    height: 2.5rem;
     width: 13rem;
     position: relative;
-    left: 5rem;
-    border: 2px dashed #F7BED3;
+    left: 4.8rem;
+    outline: 2px dashed #F7BED3;
     font-size: 2rem;
     border-radius: .5rem;
+    border: none;
+}
+
+.input:focus{
+    outline: 2px dashed #000;
+}
+
+.input::placeholder{
+    text-align: center;
 }
 
 .btn{
@@ -20,6 +29,20 @@
     border-radius: .5rem;
 }
 
-.input::placeholder{
-    text-align: center;
+.btn:hover{
+    animation: button infinite 2s alternate;
+    border: 3px dashed #000;
+    scale: 0.9;
+}
+
+@keyframes button {
+    0% {
+        background-color: #ffcadc;
+    }
+    50% {
+        background-color: #fc9ec0;
+    }
+    100% {
+        background-color: #ff8bb6;
+    }
 }
