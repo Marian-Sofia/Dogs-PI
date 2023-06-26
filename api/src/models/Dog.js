@@ -28,6 +28,7 @@ module.exports = (sequelize) => {
     },
     life_span: {
       type: DataTypes.STRING,
+      allowNull: false
     },
   }, { timestamps: false });
 };

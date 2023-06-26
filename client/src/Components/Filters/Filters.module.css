@@ -1,0 +1,24 @@
+.contain{
+    background-color: #6dfd6d5e;
+    backdrop-filter: blur(4px);
+    border-radius: 1rem;
+    outline: 2px solid #000;
+    margin: 2.5rem auto 0 auto;
+    box-shadow: 0 0 10px #000;
+    height: 4rem;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.select{
+    background-color: #acf39a;
+    height: 3rem;
+    width: auto;
+    font-size: 2rem;
+    margin: auto;
+    border: none;
+    border: 3px dashed #22c72be0;
+    border-radius: .5rem;
+}

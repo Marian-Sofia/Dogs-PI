@@ -1,5 +1,5 @@
 const { Dog, Temperaments } = require('../../db')
-const { URL_API, API_KEY } = require('dotenv').config().parsed;
+const { URL_API } = require('dotenv').config().parsed;
 const { Op } = require('sequelize')
 const { cleanArrayDogs, cleanDogs, fetchImage } = require("../../Auxiliar/auxiliar");
 
@@ -41,44 +41,12 @@ const getDogs = async () => {
 // GETDOGS -- funcion que busca por el nombre de la raza
 const getDogsByBreed = async (name) => {
 
-    // Se usa el metodo findAll para buscar por name en los perros creados en la DB
-    const dataDB = await Dog.findAll({
-        where: {
-            name: {
-                [Op.iLike]: `%${name}%`
-            }
-        }, 
-        // Se incluye la tabla de temperamentos en la busqueda
-        include: {
-            model: Temperaments,
-            attributes: ['name'],
-            through: {
-                attributes: []
-            }
-        }
-    })
+    const allDogs = await getDogs()
+    const expression = new RegExp(`${name}.*`,"i") 
+    const filter = allDogs.filter( dog => expression.test(dog.name))
+    if(filter.length < 1) throw Error('Not Found')
 
-    // Se hace el fetch a la API con la query y le pasamos el name 
-    const res = await fetch(`${URL_API}search?name=${name}`)
-    const data = await res.json()
-     if(data.length < 1) {
-         console.log(data);
-        console.log(dataDB);
-        return dataDB
-     }
-    const image = await fetchImage(data[0].reference_image_id)
-
-    // Se limpia la data para traer los datos necesarios
-    const dataAPI = [cleanDogs(data[0], image)]
-
-    // Se unen los datos de la DB y los de la API
-    const results = [...dataDB, ...dataAPI]
-
-    // Se hace el manejo del error y se lanza un mensaje 
-    if(!results) throw Error('Breed not found')
-
-    // Se retorna el array con la copia de las datas
-    return results
+    return filter
 
 }
 // GETDOGS -- funcion que busca por id
@@ -163,10 +131,15 @@ const putDogs = async ( id, name, height, weight, life_span, image, temperament 
         weight,
         life_span,
         image,
-        temperament
     }, {
         where: { id }
     })
+    temperament.map( temp => 
+        Dog.update({
+            temperament
+        }, {
+            where: { id }
+        }))
 
     // Se retorna un mensaje de exito
     return 'The dog was edited successfully'

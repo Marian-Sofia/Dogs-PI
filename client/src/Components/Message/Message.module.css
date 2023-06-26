@@ -1,0 +1,49 @@
+.edit{
+    background-color: #a2a6e2;
+    border-radius: 2rem;
+    border: 3.5px dashed #3a3e74;
+    position: fixed;
+    top: -15rem;
+    left: 15rem;
+    height: 5rem;
+    width: auto;
+    padding: 1.5rem;
+    font-size: 2rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    animation: msg 4s linear;
+}
+
+.create{
+    background-color: #a2a6e2;
+    border-radius: 2rem;
+    border: 3.5px dashed #3a3e74;
+    position: fixed;
+    top: -15rem;
+    left: 15rem;
+    height: 5rem;
+    width: auto;
+    padding: 1.5rem;
+    font-size: 2rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    animation: msg 4s linear;
+}
+
+@keyframes msg {
+    0% {
+        top: -15rem;
+    }
+    30% {
+        top: -1.5rem;
+    }
+    60% {
+        top: -1.5rem;
+    }
+    100% {
+        top: -15rem;
+    }
+}
+

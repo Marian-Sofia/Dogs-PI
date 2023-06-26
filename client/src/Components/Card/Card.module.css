@@ -1,19 +1,16 @@
 .contain{
-    background-color: #DEEFE5;
+    background-color: #d4fde5ce;
     border: 2px solid #000;
     border-radius: .5rem 2rem;
     box-shadow: 0 0 5px #000;
-    padding: 1rem 0 1rem 0;
-    /* display: grid;  
-    justify-items: center;
-    align-content: center; */
+    padding: .5rem 0 .5rem 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-content: space-between;
     align-items: center;
-    width: 25rem;
-    height: auto;
+    width: 23rem;
+    height: 35rem;
+    text-align: center;
     cursor: pointer;
 }
 
@@ -26,41 +23,39 @@
 }
 
 .name{
-    background-color: #d2fae3;
-    width: 20rem;
+    background-color: #bcfcd8;
+    width: 15rem;
     height: auto;
-    margin: 1rem 0;
+    margin: .5rem 0;
     text-align: center;
     font-size: 2rem;
     border: 4px inset #fff;
 }
 
 .img{
-    height: 15rem;
-    width: 20rem;
+    height: 12rem;
+    width: 15rem;
     object-fit: contain;
-    background-image: url('../../images/fondito.jpg');
-    margin: 1rem;
+    background-color: #f5f5dc;
     outline: 2.5px dashed #000;
     border-radius: .5rem;
 }
 
 .h3{
     font-size: 1.5rem;
-    width: 9rem;
+    width: 100%;
     text-align: center;
-    border-bottom: 2px solid #000;
 }
 
 .containTemps{
     background-color: #8f8f8f8e;
-    margin: .5rem 0;
-    width: 20rem;
+    width: 90%;
     height: auto;
     border: 2px dashed #424040;
     border-radius: 2rem;
-    padding: 1.5rem;
-    display: grid;
+    padding: .5rem;
+    display: flex;
+    flex-wrap: wrap;
     grid-template-columns: repeat(2, 1fr);
     align-content: center;
     justify-items: start;
@@ -68,5 +63,6 @@
 }
 
 .temperaments{
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    width: 45%;
 }

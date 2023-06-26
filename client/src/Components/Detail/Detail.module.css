@@ -4,13 +4,15 @@
     border: 2px dashed #000;
     border-radius: 5rem 1rem;
     width: 70%;
-    height: 32rem;
+    height: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: 8rem 10rem 14rem;
     margin: auto;
-    margin-top: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
     letter-spacing: 3px;
+    box-shadow: 0 0 10px #000;
 }
 
 .containTitle{
@@ -25,9 +27,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: .5rem auto;
-    padding: 2rem;
+    margin: auto;
+    margin-top: 1rem;
+    padding: 2.5rem;
     text-align: center;
+    box-shadow: 0 0 7px #000;
 }
 
 .title{
@@ -36,6 +40,7 @@
 
 .id{
     color: #ffbb0e;
+    padding-top: .5rem;
 }
 
 .containBtn{
@@ -58,6 +63,14 @@
     border-radius: 1.5rem;
     border: none;
     outline: 2px dashed #e4a068;
+    cursor: pointer;
+}
+
+.btnEdit:hover{
+    background-color: #a2a6e2;
+    color: #fff;
+    outline: 2px dashed #000;
+    box-shadow: 0 0 8px #000;
 }
 
 .btnDelete{
@@ -72,22 +85,43 @@
     outline: 2px dashed #e4a068;
 }
 
+.btnDelete:hover{
+    background-color: #eb6a6a;
+    color: #fff;
+    outline: 2px dashed #000;
+    box-shadow: 0 0 8px #000;
+}
+
 .img{
     grid-column: 1/2;
     grid-row: 2/4;
     height: 20rem;
     width: 20rem;
-    margin: 1.7rem 3.5rem;
+    background-image: url('../../images/imagen-fondo-papel-tapiz-abstracto-beige_53876-102527.avif');
+    object-fit: contain;
     outline: 2px solid #000;
     border-radius: .3rem;
+    margin-left: 4rem;
+    align-self: center;
+    box-shadow: 0 0 10px #000;
 }
 
 .containExtra{
-    background-color: #a2a6e2;
+    height: 9rem;
     grid-column: 2/3;
     grid-row: 2/3;
     text-align: center;
     padding: 2rem;
+    font-size: 1.1rem;
+    margin: auto;
+}
+
+.icon{
+    font-size: 1.5rem;
+    color: #d7ecff;
+    border-radius: 50%;
+    padding: .3rem;
+    background-color: #bdc1ff ;
 }
 
 .containTemps{
@@ -95,13 +129,21 @@
     grid-row: 3/4;
     display: flex;
     flex-wrap: wrap;
+    height: auto;
+    width: 25rem;
+    text-align: center;
+    font-size: 1.3rem;
+    margin: auto;
 }
 
 .temperaments{
     width: 100%;
+    border-bottom: 1px solid #000;
 }
 
 .temps{
-    width: 50%;
-    
+    width: auto;
+    padding: 0 .6rem;
+    margin: .2rem auto;
+    border-right: 1px solid #000;
 }

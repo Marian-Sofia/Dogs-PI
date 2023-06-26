@@ -5,10 +5,13 @@ import style from './CardContainer.module.css'
 const CardContainer = ({ state, page, items }) => {
     const location = useLocation().pathname
 
+
     return (
         <div className={style.contain}>
             {location === '/search' ?  
-            state.map(({ id, name, temperaments, image }) => {
+            state.slice(
+                (page - 1) * items, (page - 1) * items + items
+            ).map(({ id, name, temperaments, image }) => {
                 return <Card
                     key={id}
                     id={id}

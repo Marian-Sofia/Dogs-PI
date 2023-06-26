@@ -8,6 +8,10 @@ import Search from './Search/Search'
 import Nav from './Nav/Nav'
 import SearchBar from './SearchBar/SearchBar'
 import Paged from './Paged/Paged'
+import Filters from './Filters/Filters'
+import Loading from './Loading/Loading'
+import NotFound from './Not Found/NotFound'
+import Message from './Message/Message'
 
 export {
     Card,
@@ -20,4 +24,8 @@ export {
     Nav,
     SearchBar,
     Paged,
+    Filters,
+    Loading,
+    NotFound,
+    Message
 }

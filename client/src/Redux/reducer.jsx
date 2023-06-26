@@ -1,12 +1,23 @@
 // Se importan las action_types para hacer un manejo de ellas 
 import { 
+    ASCENTDANT_SORT,
     DELETE_DOGS,
+    DESCENDING_SORT,
     DETAIL_DOGS, 
     GET_DOGS, 
     GET_DOGS_NAME, 
     GET_TEMPERAMENTS, 
     POST_DOGS,
-    PUT_DOGS} from "./action-types";
+    PUT_DOGS,
+    WEIGHT_MIN,
+    WEIGHT_MAX,
+    TEMP,
+    API,
+    DB,
+    REFRESH,
+    RESET,
+    REFRESH_MSG
+} from "./action-types";
 
 // Se crea el estado inicial con las propiedades a las que se les va a añadir la data que se obtiene del Back-End
 const initialState = {
@@ -14,7 +25,11 @@ const initialState = {
     dogsName: [],
     detailDogs: {},
     temperaments: [],
-    message: {},
+    postMsg: {},
+    putMsg: {},
+    deleteMsg: {},
+    filter: [],
+    dogsCopy: [], 
 }
 
 // Se crea la funcion reducer en donde se hace manejo de el estado inicial y del dispatch
@@ -23,7 +38,8 @@ const reducer = (state = initialState, { type, payload }) => {
         case GET_DOGS:
             return {
                 ...state,
-                dogs: payload
+                dogs: payload,
+                dogsCopy: payload
             }
 
         case GET_DOGS_NAME:
@@ -41,19 +57,19 @@ const reducer = (state = initialState, { type, payload }) => {
         case POST_DOGS:
             return {
                 ...state,
-                message: payload
+                postMsg: payload
             }
     
         case PUT_DOGS:
             return {
                 ...state,
-                message: payload
+                putMsg: payload
             }
 
         case DELETE_DOGS:
             return {
                 ...state,
-                message: payload
+                deleteMsg: payload
             }
         
         case GET_TEMPERAMENTS:
@@ -62,6 +78,76 @@ const reducer = (state = initialState, { type, payload }) => {
                 temperaments: payload
             }
 
+        case ASCENTDANT_SORT:
+            return {
+                ...state,
+                dogs: payload,
+                filter: payload
+            }
+            
+        case DESCENDING_SORT:
+            return {
+                ...state,
+                dogs: payload,
+                filter: payload
+            }
+
+        case WEIGHT_MIN:
+            return {
+                ...state,
+                dogs: payload,
+                filter: payload
+            }
+
+        case WEIGHT_MAX: 
+            return {
+                ...state,
+                dogs: payload,
+                filter: payload
+            }
+
+        case TEMP:
+            return {
+                ...state,
+                dogs: payload,
+                filter: payload
+            }
+
+        case API:
+            return {
+                ...state,
+                dogs: payload,
+                filter: payload
+            }
+        
+        case DB:
+            return {
+                ...state,
+                dogs: payload,
+                filter: payload
+            }
+
+        case RESET: 
+            return {
+                ...state,
+                dogs: [],
+                dogsName: {},
+                filter: [],
+            }
+
+        case REFRESH: 
+            return {
+                ...state,
+                detailDogs: {}
+            }
+
+        case REFRESH_MSG:
+            return {
+                ...state,
+                postMsg: payload,
+                putMsg: payload,
+                deleteMsg: payload,
+            }
 
         default:
             return {...state}

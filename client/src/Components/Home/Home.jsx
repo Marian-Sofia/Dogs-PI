@@ -1,31 +1,45 @@
-import { useEffect, useState } from 'react';
-import { CardContainer } from '../index';
-import { useDispatch, useSelector } from 'react-redux';
-import { getDogs } from '../../Redux/actions';
-import { Paged } from '../index';
-// import style from './Home.module.css'
+import { useEffect, useState } from "react";
+import { CardContainer, Filters, Loading, Paged } from "../index";
+import { useDispatch, useSelector } from "react-redux";
+import { getDogs, getTemperaments, resetMsg } from "../../Redux/actions";
 
 const Home = () => {
-    const dogs = useSelector(state => state.dogs)
-    const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const dogs = useSelector((state) => state.dogs);
+  const filter = useSelector((state) => state.filter)
+  const createMsg = useSelector((state) => state.postMsg)
+  
+  useEffect(() => {
+    dispatch(getDogs());
+    dispatch(getTemperaments())
+    return () => {
+      dispatch(resetMsg())
+    }
+  }, [dispatch]);
 
-    useEffect(() => {
-        dispatch(getDogs())
-    }, [])
+  const [page, setPage] = useState(1);
+  const [items, setItems] = useState(9);
+  const max = filter.length > 1 ? filter.length / items : dogs.length / items;
 
-
-    const [page, setPage] = useState(1)
-    const [items, setItems] = useState(8)
-    const max = dogs.length / items
-
-
-
-    return (
+  return (
+    <div>
+        
+          {createMsg.message ?
+                <Message message={createMsg.message} type='create'/>
+            : ''
+          }
+      
+      {dogs.length ? 
         <div>
-            { dogs.length ? <CardContainer page={page} items={items} state={dogs}/> : <h1>Loading...</h1>}
-            <Paged page={page} setPage={setPage} max={max}/>
+          <Filters/>
+          <CardContainer page={page} items={items} state={filter.length > 1 ? filter : dogs} />
+          <Paged page={page} setPage={setPage} max={max} />
         </div>
-    )
-}
+         :
+         <Loading/>
+      }
+    </div>
+  );
+};
 
-export default Home
+export default Home;

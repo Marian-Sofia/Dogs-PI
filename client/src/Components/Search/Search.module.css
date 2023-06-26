@@ -2,13 +2,26 @@
     display: grid;
     justify-items: center;
     justify-content: center;
+    grid-template-columns: repeat(1, 1fr);
 }
 
 .title{
     background-color: #d8c99c;
+    height: 4rem;
+    width: 40rem;
+    margin: 2rem auto;
+    color: #fffefe;
+    font-size: 3rem;
+    text-align: center;
+    border: 2.5px dashed #000;
+    border-radius: .5rem 3rem;
+}
+
+.error{
+    background-color: #666666;
     height: 4.5rem;
     width: 40rem;
-    margin-top: 2rem;
+    margin-top: 13rem;
     margin-bottom: 1rem;
     color: #fffefe;
     font-size: 3rem;
